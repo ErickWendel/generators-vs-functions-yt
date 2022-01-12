@@ -1,20 +1,23 @@
+// curl "localhost:3000/products?productName=sabao"
+
 import { createServer } from 'http'
-import { randomUUID } from 'crypto'
 import { parse } from 'url'
-const PORT = 3000;
+import { randomUUID } from 'crypto'
+const PORT = 3000
 async function handler(request, response) {
     if (
         request.method === 'GET' &&
         request.url.includes('products')
     ) {
-
         const { query: { productName } } = parse(request.url, true)
-
-        return response.end(JSON.stringify({
+        const result = {
             id: randomUUID(),
-            product: productName,
-        }))
+            product: productName
+        }
+
+        return response.end(JSON.stringify(result))
     }
+
 
     return response.end('hey!')
 }

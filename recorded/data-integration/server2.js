@@ -1,6 +1,8 @@
-import { createServer } from 'http'
-const PORT = 4000;
+// curl -X POST "localhost:4000/cart" --data '{"id": "123"}'
 
+import { createServer } from 'http'
+
+const PORT = 4000
 async function handler(request, response) {
     if (
         request.method === 'POST' &&
@@ -8,10 +10,12 @@ async function handler(request, response) {
     ) {
         for await (const data of request) {
             const item = JSON.parse(data)
-            console.log('received', item)            
-            return response.end(`process succeeded for ${item.id}!`)
+            console.log('received', item)
+
+            return response.end(`process succeeded for ${item.id}`)
         }
     }
+
 
     return response.end('hey!')
 }
